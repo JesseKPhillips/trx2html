@@ -145,12 +145,6 @@
     <None Include="DemoTRX\test.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RidoTasks.trx2html\RidoTasks.trx2html.csproj">
-      <Project>{E6A67167-8086-4FE0-AA61-04ACB08AC792}</Project>
-      <Name>RidoTasks</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="DemoTRX\SampleVS90.trx">
       <SubType>Designer</SubType>
     </None>
