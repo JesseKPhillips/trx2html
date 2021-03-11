@@ -22,7 +22,13 @@ namespace trx2html
             }
 
             string fileName = args[0];
-            ReportGenerator.GenerateReport(fileName);
+            if(System.IO.Directory.Exists(fileName))
+            {
+                foreach (var file in System.IO.Directory.EnumerateFiles(fileName, "*.trx", SearchOption.AllDirectories))
+                    ReportGenerator.GenerateReport(file);
+            }
+            else
+                ReportGenerator.GenerateReport(fileName);
         }
 
     }
