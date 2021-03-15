@@ -116,8 +116,17 @@ namespace trx2html.Parser
         { 
             get
             {
-                double total = TestMethods.Count();
-                double result = Math.Round((1- Failed / (Total-Ignored)) * 100, 2);
+                double total = (Total - Ignored);
+                if(total == 0)
+                {
+                    if (Failed != 0)
+                        throw new Exception("Total Tests is zero, but some have failed.");
+                    return double.NaN;
+                }
+                double percentFail = Failed / total;
+                double percentPass = 1 - percentFail;
+
+                double result = Math.Round(percentPass * 100, 2);
                 return result;
             }
         }
@@ -269,7 +278,9 @@ namespace trx2html.Parser
             get
             {
                 if (TestClassList.Count>0)
-                    return Math.Round(TestClassList.Average(c => c.Percent));
+                    return Math.Round(TestClassList
+                        .Where(c => !double.IsNaN(c.Percent))
+                        .Average(c => c.Percent));
                 return 0;
             }
         }
